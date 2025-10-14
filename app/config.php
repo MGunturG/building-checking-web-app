@@ -27,7 +27,7 @@ if (db_connect == false) {
 // 	exit
 //
 function require_login() {
-	if (!isset($_SESSION['loggedin'] || $_SESSION['loggenin'] !== true) {
+	if (!isset($_SESSION['loggedin'] || $_SESSION['loggedin'] !== true) {
 		header(Location: login.php);
 		exit;
 	}
