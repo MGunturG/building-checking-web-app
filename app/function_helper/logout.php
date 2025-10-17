@@ -6,5 +6,5 @@ session_start();
 session_destroy();
 
 // then, redirect to login page
-header("location:../index.php?login_status=logout")
+header("location:../login.php?login_status=logout")
 ?>
