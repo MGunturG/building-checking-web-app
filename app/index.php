@@ -25,15 +25,15 @@
         }
     }
     ?>
-    <form method="POST" action="login_check.php">
+    <form method="POST" action="function_helper/login_check.php" autocomplete="off">
         <table>
             <tr>
                 <td>Username</td>
-                <td><input type="text" name="username"></td>
+                <td><input type="text" name="username" required></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password"></td>
+                <td><input type="password" name="password" required></td>
             </tr>
             <tr>
                 <td><input type="submit" value="login"></td>

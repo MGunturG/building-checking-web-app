@@ -1,14 +1,13 @@
-// checking if the user already logged in or not
 <?php
 // session, as usually
 session_start();
 
-// check if login_status on session history is "logged_in" or not
-// if login_status NOT "logged_in", the redirect to login page
-// (location on ../index.php) and pass login_status to "not_logged_in"
-if ($_SESSION['login_status'] != "logged_in"); {
+// check if user already logged in or not
+// using session. "login_status" passed from
+// login_check.php on line 21
+if ($_SESSION['login_status'] != "logged_in") {
 	header("location:../index.php?login_status=not_logged_in");
-}
+} 
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +20,7 @@ if ($_SESSION['login_status'] != "logged_in"); {
 <body>
 <h2>yes, this is dashboard page</h2>
 <h4>also, welcome aboard, <?php echo $_SESSION['username']; ?>!</h4>
-<a href="logout.php">click here to logout</a>
+<h4>and your role is <?php echo $_SESSION['user_role']; ?>.</h4>
+<a href="../function_helper/logout.php">click here to logout</a>
 </body>
 </html>
