@@ -1,3 +1,27 @@
+<?php
+include "config.php";
+include "function_helper/db_query.php";
+include "function_helper/User.php";
+
+$_User = new User();
+
+// this triggered when a form was submitted
+if (isset($_POST['register_Submit'])) {
+	// sanitize
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
+	$current_data = get_data("select username from users where username = '$username'");
+	if (count($current_data) === 0) {
+		// insert new data
+		$_User->AddNewUser($username, $password, 'maintainer');
+		header("location:register.php?register_status=success");
+	} else {
+		header("location:register.php?register_status=failed");
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +43,7 @@
 	?>
 </header>
 <body>
-	<form method="POST" action="function_helper/register.php" autocomplete="off">
+	<form method="POST" autocomplete="off">
 	    <table>
 	        <tr>
 	            <td>Username</td>
@@ -30,7 +54,7 @@
 	            <td><input type="password" name="password" required></td>
 	        </tr>
 	        <tr>
-	            <td><input type="submit" value="register"></td>
+	            <td><input type="submit" name="register_Submit" value="register"></td>
 	        </tr>
 	    </table>
 	</form>
