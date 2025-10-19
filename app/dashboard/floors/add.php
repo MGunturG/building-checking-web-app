@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+// check if the user already logged in or not
+if($_SESSION['login_status'] != "logged_in") {
+	header("location:../../login.php?login_status=not_logged_in");
+}
+
 include "../../config.php";
 include "../../function_helper/db_query.php";
 include "../../function_helper/Floor.php";
@@ -14,9 +21,9 @@ if (isset($_POST['floor_Submit'])) {
 
 	if (count($current_data) === 0) { // if there is no data
 		$_Floor->AddNewFloor($floor_name); // then add new data
-		header("location:floor.php?add_floor=success");
+		header("location:add.php?status=success");
 	} else {
-		header("location:floor.php?add_floor=existed");
+		header("location:add.php?status=existed");
 	}
 }
 ?>
@@ -31,10 +38,10 @@ if (isset($_POST['floor_Submit'])) {
 <body>
 	<header>
 	<?php
-	if (isset($_GET['add_floor'])) {
-		if ($_GET['add_floor'] == "success") {
+	if (isset($_GET['status'])) {
+		if ($_GET['status'] == "success") {
 			echo "floor added!";
-		} else if ($_GET['add_floor'] == "existed") {
+		} else if ($_GET['status'] == "existed") {
 			echo "floor already exist!";
 		}
 	}
