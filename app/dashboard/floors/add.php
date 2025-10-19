@@ -8,7 +8,7 @@ if($_SESSION['login_status'] != "logged_in") {
 
 include "../../config.php";
 include "../../function_helper/db_query.php";
-include "../../function_helper/Floor.php";
+include "../../function_helper/class/Floor.php";
 
 $_Floor = new Floor();
 

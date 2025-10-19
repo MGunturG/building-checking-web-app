@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 include "function_helper/db_query.php";
-include "function_helper/User.php";
+include "function_helper/class/User.php";
 
 $_User = new User();
 
