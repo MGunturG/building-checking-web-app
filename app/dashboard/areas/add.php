@@ -19,7 +19,7 @@ $floors_data = $_Floor->GetAllFloorData();
 $_Area = new Area();
 
 
-// this will be triggered when form wa submitted
+// this will be triggered when form was submitted
 if (isset($_POST['area_Submit'])){
 	$selected_floor_id = $_POST['selected_floor'];
 	$area_name = $_POST['area_name'];
