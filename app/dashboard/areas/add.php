@@ -8,25 +8,35 @@ if($_SESSION['login_status'] != "logged_in") {
 
 include "../../config.php";
 include "../../function_helper/db_query.php";
-// include "../../function_helper/class/Area.php";
+include "../../function_helper/class/Area.php";
+include "../../function_helper/class/Floor.php";
+
+// get floors data
+$_Floor = new Floor();
+$floors_data = $_Floor->GetAllFloorData();
+
+// initiate object Area
+$_Area = new Area();
 
 
+// this will be triggered when form wa submitted
 if (isset($_POST['area_Submit'])){
 	$selected_floor_id = $_POST['selected_floor'];
 	$area_name = $_POST['area_name'];
 
+	// get current data to check if there already
+	// data with same entry (prevent duplicate data)
 	$current_data = get_data("select area_name from areas where floor_id = '$selected_floor_id' and area_name = '$area_name'");
 
 	if (count($current_data) === 0) { // if there is no data
-		run_query("insert into areas values('','$selected_floor_id','$area_name')");
+		// then insert new data
+		$_Area->AddNewArea($selected_floor_id, $area_name);
 		header("location:add.php?status=success");
 	} else {
+		// throw message data is duplicate
 		header("location:add.php?status=existed");
 	}
 }
-
-// get floors data
-$floors_data = get_data("select * from floors");
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,7 +62,7 @@ $floors_data = get_data("select * from floors");
 		<div>
             <label for="floor_choice">Choose floor:</label>
             <select name="selected_floor" required>
-                <option value="">--Select an option--</option>
+                <option value="">--Select a floor--</option>
                 
                 <?php foreach ($floors_data as $data): ?>
                 <option value="<?php echo $data["id"] ?>"><?php echo $data["floor_name"]?></option>
