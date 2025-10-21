@@ -21,3 +21,4 @@ function run_query($sql_query) {
 	global $db_connection;
 	return mysqli_query($db_connection, $sql_query);
 }
+?>
