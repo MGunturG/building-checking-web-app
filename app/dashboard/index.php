@@ -4,7 +4,7 @@ session_start();
 
 // check if user already logged in or not
 // using session. "login_status" passed from
-// login_check.php on line 21
+// login.php on line 21
 if ($_SESSION['login_status'] != "logged_in") {
 	header("location:../index.php?login_status=not_logged_in");
 } 
